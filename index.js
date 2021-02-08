@@ -35,7 +35,10 @@ class Gallery {
         }
         this.getAlbumImages(this.albumID);
         this.createEventListener();
-      });
+      })
+      .catch(() => {
+        console.log('Something went wrong');
+    });
   }
   getAlbumImages(albumID) {
     fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${1 + Number(albumID)}`)
