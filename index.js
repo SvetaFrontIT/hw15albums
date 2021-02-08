@@ -21,7 +21,6 @@ class Gallery {
     this.list = this.container.querySelector(".js-list");
     this.indicatoros = this.container.querySelector(".js-indicators");
     this.images = this.container.querySelector(".js-images");
-    this.albumID = 1;
     fetch("https://jsonplaceholder.typicode.com/albums")
       .then((response) => response.json())
       .then((response) => {
@@ -33,7 +32,7 @@ class Gallery {
           this.a.innerHTML = response[i].title;
           this.list.appendChild(this.a);
         }
-        this.getAlbumImages(this.albumID);
+        this.getAlbumImages(1);
         this.createEventListener();
       });
   }
