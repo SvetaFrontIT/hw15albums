@@ -21,7 +21,7 @@ class Gallery {
     this.list = this.container.querySelector(".js-list");
     this.indicatoros = this.container.querySelector(".js-indicators");
     this.images = this.container.querySelector(".js-images");
-    this.albumID = 0;
+    this.albumID = 1;
     fetch("https://jsonplaceholder.typicode.com/albums")
       .then((response) => response.json())
       .then((response) => {
@@ -35,23 +35,21 @@ class Gallery {
         }
         this.getAlbumImages(this.albumID);
         this.createEventListener();
-      })
-      .catch(() => {
-        console.log('Something went wrong');
-    });
+      });
   }
   getAlbumImages(albumID) {
-    fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${1 + Number(albumID)}`)
+    fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${Number(albumID)}`)
       .then((response) => response.json())
       .then((response) => {
+        this.clearCarusel ();
         this.createCaruselIndicators (response);
         this.createCaruselImages (response);
+        
       });
   }
   createEventListener() {
     this.list.addEventListener("click", (event) => {
       if (event.target.classList.contains("js-item")) {
-        this.clearCarusel ();
         this.albumID = event.target.id;
       }
       this.getAlbumImages(this.albumID);
